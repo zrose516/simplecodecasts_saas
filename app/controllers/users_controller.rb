@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
     
     def index #leads to views>users>index.html.erb
+        @users = User.all #selects every user instead of just searching for specific user.id
     end
     
     def show #leads to views>users>show.html.erb

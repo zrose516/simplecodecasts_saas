@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <ul class="list-unstyled">
+            <% @users.each do |user| %>
+                <% if user.profile %> <%# will output only if user has created a profile %>
+                    <li>
+                        <div class="well row <%= cycle('white-bg', '') %>"> <%#can drop ruby code directly into class, will cause colors to alternate, define in users.css.scss %>
+                            <div class="col-sm-4 text-center">
+                                <% if user.profile.avatar %>
+                                    <%= link_to user do %> <%# allows you to click on index pic to go to user profile %>
+                                        <%= image_tag user.profile.avatar.url(:thumb), class: 'user-index-avatar' %> <%# need to change varibale from @user to user since user is defined in if statement %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                           
+                            <div>
+                                <%= link_to user do %>
+                                    <h2><%= user.profile.first_name %> <%= user.profile.last_name %></h2>
+                                 <% end %>   
+                                <p> <%= user.profile.job_title %> </p>
+                            </div>
+                        </div>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>
+</div>

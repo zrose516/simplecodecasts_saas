@@ -25,13 +25,17 @@
     </div>
     <div class="collapse navbar-collapse" id="main-nav-collapse">
       <div class="nav navbar-nav navbar-right">
-        <% if current_user %>
+        <% if user_signed_in? %> <%# more direct method of selecting the signed in user %>
           <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-primary navbar-btn' %>
         <% else %>
           <%= link_to "Log In", new_user_session_path, class: "btn btn-primary navbar-btn", method: :get %>
         <% end %>
       </div> 
       <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li><%= link_to "Community", users_path %></li>  <%#if the user is signed in, will create link in navbar to go back to community page %>
+          <li><%= link_to "My Account", edit_user_registration_path(current_user) %></li> <%# will direct user to account page and let them delete; devise adds this so need to use devise contoller action, add bootstrap in devise > registration > edit %>
+        <% end %>
         <li><%= link_to "About", about_path %></li>
         <li><%= link_to "Contact Us", new_contact_path %></li>
       </ul>
